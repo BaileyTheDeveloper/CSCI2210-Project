@@ -1,0 +1,6 @@
+Bailey's assigned classes:
+
+Property
+Unit
+WorkOrder
+Inspection
