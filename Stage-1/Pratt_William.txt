@@ -1,0 +1,5 @@
+William Pratt's assigned classes
+
+Admin User
+Owner
+Tenant
