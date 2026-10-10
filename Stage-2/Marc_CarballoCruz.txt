@@ -1,8 +1,8 @@
-===========================
+=====================================
 Author: Marc Carballo Cruz
 date 10/10/2026
-CSCI 2210 - Project Stage 2
-===========================
+CSCI 2210 - Project Stage 2 - My Part
+=====================================
 1. Created the following classes:
 	-LoginHandler
 	-LogoutHandler
