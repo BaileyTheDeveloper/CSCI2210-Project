@@ -1,0 +1,16 @@
+=====================================
+Author: Bailey Pointer
+date 10/10/2026
+CSCI 2210 - Project Stage 2 - My Part
+=====================================
+1. Designed and created the following classes:
+	-Property
+	-Unit
+	-Work Order
+	-Inspection
+	
+2. Took all initial classes and moved them from a chart in Teams to LucidChart, recreating them all manually. 
+
+3. Worked on initial links between all classes when brought into LucidChart
+
+4. Brainstormed and created classes for log in and log out processes that were eventually scrapped for better implementation
