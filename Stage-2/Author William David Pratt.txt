@@ -1,0 +1,12 @@
+Author: William David Pratt
+date 10/11/2026
+CSCI 2210 - Project Stage 2 - My Part
+
+1) Designed the following
+	User
+	AdminUser
+	Owner
+	Tenant
+2) Set Direction for team in initial stages
+3) Took meetings with professor to outline lead changes and requirements
+4) tried to be helpful 
