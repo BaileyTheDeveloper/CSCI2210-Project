@@ -1,52 +1,22 @@
-/**
- * Stores the shared identity and account information for application users.
- */
 public class User {
     private final String userId;
-    private final String name;
-    private final String email;
-    private final String phoneNumber;
-    private final String password;
+    private String name;
+    private String email;
+    private String phoneNumber;
+    private String passwordHash;
     private boolean isActive;
 
-    public User(String userId, String name, String email, String phoneNumber, String password) {
-        if (userId == null || name == null || email == null || phoneNumber == null || password == null) {
-            System.out.println("Error: User information cannot be null.");
-            this.userId = "";
-            this.name = "";
-            this.email = "";
-            this.phoneNumber = "";
-            this.password = "";
-            this.isActive = false;
-            return;
-        }
+    // Constructor initializing all required fields and setting isActive to true by default
+    public User(String userId, String name, String email, String phoneNumber, String passwordHash) {
         this.userId = userId;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.isActive = true;
+        this.passwordHash = passwordHash;
+        this.isActive = true; 
     }
 
-    protected User(User user) {
-        if (user == null) {
-            System.out.println("Error: User cannot be copied because it is null.");
-            this.userId = "";
-            this.name = "";
-            this.email = "";
-            this.phoneNumber = "";
-            this.password = "";
-            this.isActive = false;
-            return;
-        }
-        this.userId = user.userId;
-        this.name = user.name;
-        this.email = user.email;
-        this.phoneNumber = user.phoneNumber;
-        this.password = user.password;
-        this.isActive = user.isActive;
-    }
-
+    // Getter for final field userId (no setter to protect identity integrity)
     public String getUserId() {
         return userId;
     }
@@ -55,23 +25,43 @@ public class User {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public boolean validatePassword(String password) {
-        return this.password.equals(password);
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
+    // Standard setter for updating credentials safely
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    // Methods to manage status that subclasses might need to check
     public boolean isActive() {
         return isActive;
     }
 
     public void setActive(boolean active) {
         this.isActive = active;
+    }
+
+    // Method to validate password matching logic
+    public boolean validatePassword(String password) {
+        // Placeholder check: update this with your actual hashing framework logic (e.g., BCrypt)
+        return this.passwordHash != null && this.passwordHash.equals(password);
     }
 }
