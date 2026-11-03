@@ -9,14 +9,26 @@ public class ManagerWorkOrder extends WorkOrder {
         this.isManagerApproved = false;
     }
 
-    public void approveOrder(String managerId) {
+    public boolean approveOrder(String managerId) {
+        if (isCompleted()) {
+            return false;
+        }
         this.isManagerApproved = true;
         this.updateStatus("APPROVED");
+        return true;
     }
 
-    public void assignContractor(String contractorId) {
+    public boolean assignContractor(String contractorId) {
+        if (isCompleted()) {
+            return false;
+        }
         this.assignedContractorId = contractorId;
         this.updateStatus("ASSIGNED");
+        return true;
+    }
+
+    private boolean isCompleted() {
+        return "COMPLETED".equals(getStatus());
     }
 
     public double getApprovedBudget() { return approvedBudget; }

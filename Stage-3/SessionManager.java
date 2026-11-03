@@ -30,7 +30,7 @@ public class SessionManager {
             return null;
         }
         for (int i = 0; i < activeSessions.size(); i++) {
-            if (activeSessions.get(i).getSessionId().equals(sessionId)) {
+            if (activeSessions.get(i).getSessionId().equalsIgnoreCase(sessionId)) {
                 return activeSessions.get(i);
             }
         }
@@ -39,7 +39,7 @@ public class SessionManager {
 
     public boolean terminateSession(String sessionId) {
         for (int i = 0; i < activeSessions.size(); i++) {
-            if (activeSessions.get(i).getSessionId().equals(sessionId)) {
+            if (activeSessions.get(i).getSessionId().equalsIgnoreCase(sessionId)) {
                 UserSession session = activeSessions.remove(i);
                 session.invalidate();
                 return true;

@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Property {
@@ -28,8 +30,24 @@ public class Property {
         return false;
     }
 
+    public List<Unit> getUnits() {
+        return new ArrayList<>(units.values());
+    }
+
+    public String getDwellingType() {
+        return dwellingType;
+    }
+
     public Unit getUnit(String unitId) {
-        return units.get(unitId);
+        if (unitId == null) {
+            return null;
+        }
+        for (Unit unit : units.values()) {
+            if (unit.getUnitId().equalsIgnoreCase(unitId)) {
+                return unit;
+            }
+        }
+        return null;
     }
 
     public int getTotalUnits() {

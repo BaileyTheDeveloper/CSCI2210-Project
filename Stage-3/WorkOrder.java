@@ -1,11 +1,11 @@
 import java.util.Date;
 
 public class WorkOrder {
-    protected String orderId;
-    protected String unitId;
-    protected String description;
-    protected String status; // e.g., PENDING, IN_PROGRESS, COMPLETED
-    protected Date dateCreated;
+    private String orderId;
+    private String unitId;
+    private String description;
+    private String status; // e.g., PENDING, IN_PROGRESS, COMPLETED
+    private Date dateCreated;
 
     public WorkOrder(String orderId, String unitId, String description) {
         this.orderId = orderId;

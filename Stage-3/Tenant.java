@@ -47,8 +47,4 @@ public class Tenant extends User {
     public void setCurrentUnit(Unit currentUnit) {
         this.currentUnit = currentUnit;
     }
-
-    public void payRent(double amount) {
-        throw new UnsupportedOperationException("Rent payment will be added with the payment classes.");
-    }
 }

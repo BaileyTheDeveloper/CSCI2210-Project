@@ -13,16 +13,4 @@ public class AdminUser extends User {
     public String getEmployeeId() {
         return employeeId;
     }
-
-    public void manageProperties() {
-        System.out.println("Property management is handled by the property classes.");
-    }
-
-    public void generateFinancialReports() {
-        System.out.println("Financial reports are not available yet.");
-    }
-
-    public void assignMaintenance() {
-        System.out.println("Maintenance assignment is handled by the work order classes.");
-    }
 }

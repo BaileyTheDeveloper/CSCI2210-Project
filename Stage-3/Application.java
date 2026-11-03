@@ -7,6 +7,8 @@ public class Application {
     private String adminComments;
     private Date reviewDate;
     private String reviewedByAdminID;
+    private String applicantId;
+    private String unitId;
 
     public Application(String applicationID, Date submissionDate, String status) {
         this.applicationID = applicationID;
@@ -26,16 +28,25 @@ public class Application {
         return "Application ID: " + applicationID + " | Status: " + status + " | Submitted: " + submissionDate;
     }
 
-    public Lease generateLease() {
-        return new Lease(
-            "LEASE-" + applicationID,
-            null,
-            null,
-            0.0,
-            0.0,
-            "TBD",
-            "TBD"
-        );
+    public String getApplicationID() {
+        return applicationID;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getApplicantId() {
+        return applicantId;
+    }
+
+    public String getUnitId() {
+        return unitId;
+    }
+
+    public void setApplicantAndUnit(String applicantId, String unitId) {
+        this.applicantId = applicantId;
+        this.unitId = unitId;
     }
 
     public void setAdminComments(String adminComments) {

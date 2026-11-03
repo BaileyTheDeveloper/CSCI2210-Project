@@ -1,11 +1,11 @@
 import java.util.Date;
 
 public class Invoice {
-    protected String invoiceId;
-    protected String leaseId;
-    protected double amountDue;
-    protected Date dueDate;
-    protected boolean isPaid;
+    private String invoiceId;
+    private String leaseId;
+    private double amountDue;
+    private Date dueDate;
+    private boolean isPaid;
 
     public Invoice(String invoiceId, String leaseId, double amountDue, Date dueDate) {
         this.invoiceId = invoiceId;

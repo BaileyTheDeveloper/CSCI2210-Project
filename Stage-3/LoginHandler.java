@@ -18,7 +18,7 @@ public class LoginHandler {
      * @return the new session, or null if the credentials are invalid
      */
     public UserSession executeLogin(String email, String password) {
-        User user = userManager.authenticate(email, password);
+        User user = authenticate(email, password);
         if (user == null) {
             return null;
         }
@@ -33,6 +33,14 @@ public class LoginHandler {
      * @return true if the credentials are valid
      */
     public boolean validateCredentials(String email, String password) {
-        return userManager.authenticate(email, password) != null;
+        return authenticate(email, password) != null;
+    }
+
+    private User authenticate(String email, String password) {
+        User user = userManager.findUserByEmail(email);
+        if (user != null && user.isActive() && user.validatePassword(password)) {
+            return user;
+        }
+        return null;
     }
 }

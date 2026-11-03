@@ -21,6 +21,22 @@ public class Unit {
         return unitId;
     }
 
+    public String getUnitNumber() {
+        return unitNumber;
+    }
+
+    public String getPropertyId() {
+        return propertyId;
+    }
+
+    public int getBedrooms() {
+        return bedrooms;
+    }
+
+    public int getBathrooms() {
+        return bathrooms;
+    }
+
     public double getRentAmount() {
         return monthlyRent;
     }
@@ -39,5 +55,12 @@ public class Unit {
 
     public boolean isVacant() {
         return vacancyStatus;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("  %s | Unit %s | %d bed / %d bath | $%.2f | %s", getUnitId(),
+                getUnitNumber(), getBedrooms(), getBathrooms(), getRentAmount(),
+                isVacant() ? "Vacant" : "Occupied");
     }
 }

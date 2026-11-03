@@ -32,8 +32,4 @@ public class Applicant extends User {
     public List<String> getApplicationHistory() {
         return new ArrayList<>(applicationHistory);
     }
-
-    public Application apply(Unit unit) {
-        throw new UnsupportedOperationException("Application creation will be added with the Application class.");
-    }
 }

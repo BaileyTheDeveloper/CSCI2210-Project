@@ -6,13 +6,9 @@ import java.util.List;
  */
 public class UserManager {
     private final ArrayList<User> users;
-    private int nextUserId;
-    private int nextApplicantId;
 
     public UserManager() {
         this.users = new ArrayList<>();
-        this.nextUserId = 1;
-        this.nextApplicantId = 1;
     }
 
     public boolean addUser(User user) {
@@ -24,31 +20,13 @@ public class UserManager {
         return true;
     }
 
-    public boolean registerApplicant(String name, String email, String phoneNumber, String password) {
-        if (findUserByEmail(email) != null) {
-            return false;
-        }
-
-        String userId = "USER" + nextUserId;
-        while (findUserById(userId) != null) {
-            nextUserId++;
-            userId = "USER" + nextUserId;
-        }
-
-        String applicantId = "APP" + nextApplicantId;
-        Applicant applicant = new Applicant(userId, name, email, phoneNumber, password, applicantId);
-        if (!addUser(applicant)) {
-            return false;
-        }
-
-        nextUserId++;
-        nextApplicantId++;
-        return true;
+    public List<User> getUsers() {
+        return new ArrayList<>(users);
     }
 
     public boolean removeUser(String userId) {
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getUserId().equals(userId)) {
+            if (users.get(i).getUserId().equalsIgnoreCase(userId)) {
                 users.remove(i);
                 return true;
             }
@@ -61,7 +39,7 @@ public class UserManager {
             return null;
         }
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getUserId().equals(userId)) {
+            if (users.get(i).getUserId().equalsIgnoreCase(userId)) {
                 return users.get(i);
             }
         }
@@ -82,13 +60,13 @@ public class UserManager {
     }
 
     public boolean editUser(String userId, User updatedUser) {
-        if (userId == null || updatedUser == null || !userId.equals(updatedUser.getUserId())) {
+        if (userId == null || updatedUser == null || !userId.equalsIgnoreCase(updatedUser.getUserId())) {
             System.out.println("Error: The updated user must have the same user ID.");
             return false;
         }
         int userIndex = -1;
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getUserId().equals(userId)) {
+            if (users.get(i).getUserId().equalsIgnoreCase(userId)) {
                 userIndex = i;
                 break;
             }
@@ -98,7 +76,7 @@ public class UserManager {
             return false;
         }
         User emailMatch = findUserByEmail(updatedUser.getEmail());
-        if (emailMatch != null && !emailMatch.getUserId().equals(userId)) {
+        if (emailMatch != null && !emailMatch.getUserId().equalsIgnoreCase(userId)) {
             System.out.println("Error: Another user already has that email address.");
             return false;
         }
@@ -123,13 +101,5 @@ public class UserManager {
             }
         }
         return results;
-    }
-
-    public User authenticate(String email, String password) {
-        User user = findUserByEmail(email);
-        if (user != null && user.isActive() && user.validatePassword(password)) {
-            return user;
-        }
-        return null;
     }
 }
