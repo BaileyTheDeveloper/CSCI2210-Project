@@ -38,24 +38,30 @@ public interface Menu {
     }
 
     /**
-     * @return the number entered, or -1 if the answer is not a whole number
+     * Prompts the user repeatedly until a valid whole number is entered.
      */
     default int promptInt(String label) {
-        try {
-            return Integer.parseInt(prompt(label));
-        } catch (NumberFormatException e) {
-            return -1;
+        while (true) {
+            String input = prompt(label);
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid whole number.");
+            }
         }
     }
 
     /**
-     * @return the number entered, or -1 if the answer is not a number
+     * Prompts the user repeatedly until a valid decimal number is entered.
      */
     default double promptDouble(String label) {
-        try {
-            return Double.parseDouble(prompt(label));
-        } catch (NumberFormatException e) {
-            return -1;
+        while (true) {
+            String input = prompt(label);
+            try {
+                return Double.parseDouble(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
         }
     }
 }
