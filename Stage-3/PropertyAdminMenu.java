@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Lets an admin add properties and units and assign properties to owners.
+ * Lets an admin add, update, list, and remove properties and units, as well as assign properties to owners.
  */
 public class PropertyAdminMenu implements Menu {
     private final Scanner scanner;
@@ -24,9 +24,13 @@ public class PropertyAdminMenu implements Menu {
     public void displayOptions() {
         System.out.println("\nProperty Management:");
         System.out.println("1. Add property");
-        System.out.println("2. Add unit to a property");
-        System.out.println("3. List properties and units");
-        System.out.println("4. Assign property to an owner");
+        System.out.println("2. Update property address/type");
+        System.out.println("3. Delete property");
+        System.out.println("4. Add unit to a property");
+        System.out.println("5. Update unit rent");
+        System.out.println("6. Delete unit from a property");
+        System.out.println("7. List properties and units");
+        System.out.println("8. Assign property to an owner");
         System.out.println("0. Back");
         System.out.print("Select an option: ");
     }
@@ -38,12 +42,24 @@ public class PropertyAdminMenu implements Menu {
                 addProperty();
                 break;
             case 2:
-                addUnit();
+                updateProperty();
                 break;
             case 3:
-                listProperties();
+                deleteProperty();
                 break;
             case 4:
+                addUnit();
+                break;
+            case 5:
+                updateUnitRent();
+                break;
+            case 6:
+                deleteUnit();
+                break;
+            case 7:
+                listProperties();
+                break;
+            case 8:
                 assignOwner();
                 break;
             default:
@@ -59,6 +75,31 @@ public class PropertyAdminMenu implements Menu {
             return;
         }
         System.out.println("Property created: " + propertyManager.addProperty(address, type));
+    }
+
+    private void updateProperty() {
+        String propertyId = prompt("Property ID to update");
+        Property property = propertyManager.findProperty(propertyId);
+        if (property == null) {
+            System.out.println("Property not found.");
+            return;
+        }
+        String newAddress = prompt("New Address (leave blank to keep current: " + property.getAddress() + ")");
+        if (!newAddress.isEmpty()) {
+            property.setAddress(newAddress);
+        }
+        System.out.println("Property updated successfully.");
+    }
+
+    private void deleteProperty() {
+        String propertyId = prompt("Property ID to delete");
+        Property property = propertyManager.findProperty(propertyId);
+        if (property == null) {
+            System.out.println("Property not found.");
+            return;
+        }
+        propertyManager.getProperties().remove(property);
+        System.out.println("Property " + propertyId + " deleted.");
     }
 
     private void addUnit() {
@@ -77,6 +118,36 @@ public class PropertyAdminMenu implements Menu {
         }
         Unit unit = propertyManager.addUnit(propertyId, unitNumber, rent, bedrooms, bathrooms);
         System.out.println("Unit created: " + unit.getUnitId());
+    }
+
+    private void updateUnitRent() {
+        String unitId = prompt("Unit ID to update");
+        Unit unit = propertyManager.findUnit(unitId);
+        if (unit == null) {
+            System.out.println("Unit not found.");
+            return;
+        }
+        double newRent = promptDouble("New Monthly Rent");
+        if (newRent < 0) {
+            System.out.println("Invalid rent amount.");
+            return;
+        }
+        unit.setRentAmount(newRent);
+        System.out.println("Rent updated successfully for Unit " + unitId + ".");
+    }
+
+    private void deleteUnit() {
+        String unitId = prompt("Unit ID to delete");
+        Property property = propertyManager.findPropertyByUnitId(unitId);
+        if (property == null) {
+            System.out.println("Unit or parent property not found.");
+            return;
+        }
+        if (property.removeUnit(unitId)) {
+            System.out.println("Unit " + unitId + " removed from property " + property.getPropertyId() + ".");
+        } else {
+            System.out.println("Failed to remove unit.");
+        }
     }
 
     private void listProperties() {
