@@ -15,21 +15,26 @@ public class WorkOrderManager {
         this.userManager = userManager;
     }
 
-    /**
-     * Describes a work order on one line, showing the assigned person's name rather than their ID.
-     */
     public String describe(WorkOrder order) {
         String contractorId = order instanceof ManagerWorkOrder
                 ? ((ManagerWorkOrder) order).getAssignedContractorId() : null;
         User contractor = contractorId == null ? null : userManager.findUserById(contractorId);
         String contractorName = contractorId == null ? "nobody"
                 : contractor == null ? "Unknown person" : contractor.getName();
-        return String.format("  %s | Unit %s | %s | %s | Assigned to: %s", order.getOrderId(),
+        
+        String typeLabel = order instanceof Inspection ? "[Inspection] " : "";
+        return String.format("  %s%s | Unit %s | %s | %s | Assigned to: %s", typeLabel, order.getOrderId(),
                 order.getUnitId(), order.getStatus(), order.getDescription(), contractorName);
     }
 
     public WorkOrder createWorkOrder(String unitId, String description) {
         WorkOrder order = new ManagerWorkOrder("WO" + nextWorkOrderId++, unitId, description, 0.0);
+        workOrders.put(order.getOrderId(), order);
+        return order;
+    }
+
+    public WorkOrder createInspection(String unitId, String description, double budget) {
+        Inspection order = new Inspection("INSP" + nextWorkOrderId++, unitId, description, budget);
         workOrders.put(order.getOrderId(), order);
         return order;
     }
