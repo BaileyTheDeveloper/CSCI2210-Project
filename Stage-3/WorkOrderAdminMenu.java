@@ -27,8 +27,9 @@ public class WorkOrderAdminMenu implements Menu {
     public void displayOptions() {
         System.out.println("\nWork Orders:");
         System.out.println("1. List work orders");
-        System.out.println("2. Approve a work order");
-        System.out.println("3. Assign maintenance staff");
+        System.out.println("2. Create inspection order");
+        System.out.println("3. Approve a work order");
+        System.out.println("4. Assign maintenance staff");
         System.out.println("0. Back");
         System.out.print("Select an option: ");
     }
@@ -40,9 +41,12 @@ public class WorkOrderAdminMenu implements Menu {
                 listWorkOrders();
                 break;
             case 2:
-                approve();
+                createInspection();
                 break;
             case 3:
+                approve();
+                break;
+            case 4:
                 assignStaff();
                 break;
             default:
@@ -58,6 +62,18 @@ public class WorkOrderAdminMenu implements Menu {
         for (WorkOrder order : orders) {
             System.out.println(workOrderManager.describe(order));
         }
+    }
+
+    private void createInspection() {
+        String unitId = prompt("Unit ID");
+        String desc = prompt("Inspection Description");
+        double budget = promptDouble("Approved Budget");
+        if (unitId.isEmpty() || desc.isEmpty() || budget < 0) {
+            System.out.println("Invalid inspection details.");
+            return;
+        }
+        WorkOrder insp = workOrderManager.createInspection(unitId, desc, budget);
+        System.out.println("Inspection order created: " + insp.getOrderId());
     }
 
     private ManagerWorkOrder findOrder() {
