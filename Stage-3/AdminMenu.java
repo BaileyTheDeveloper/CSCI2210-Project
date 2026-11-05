@@ -29,8 +29,8 @@ public class AdminMenu implements Menu {
     @Override
     public void displayOptions() {
         System.out.println("\nAdmin Menu:");
-        System.out.println("1. Manage properties");
-        System.out.println("2. Create owner or maintenance account");
+        System.out.println("1. Manage properties & units");
+        System.out.println("2. Manage user accounts");
         System.out.println("3. Review applications");
         System.out.println("4. Manage work orders");
         System.out.println("5. View financial report");
