@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -25,6 +26,7 @@ public class MaintenanceMenu implements Menu {
         System.out.println("\nMaintenance Menu:");
         System.out.println("1. View my assigned work orders");
         System.out.println("2. Update a work order's status");
+        System.out.println("3. Add checklist/notes to an Inspection");
         System.out.println("0. Log out");
         System.out.print("Select an option: ");
     }
@@ -38,6 +40,9 @@ public class MaintenanceMenu implements Menu {
             case 2:
                 updateStatus();
                 break;
+            case 3:
+                updateInspectionDetails();
+                break;
             default:
                 System.out.println("Invalid option.");
         }
@@ -50,6 +55,11 @@ public class MaintenanceMenu implements Menu {
         }
         for (WorkOrder order : orders) {
             System.out.println(workOrderManager.describe(order));
+            if (order instanceof Inspection) {
+                Inspection insp = (Inspection) order;
+                System.out.println("    Notes: " + (insp.getInspectorNotes() == null ? "None" : insp.getInspectorNotes()));
+                System.out.println("    Checklist items: " + insp.getChecklist());
+            }
         }
     }
 
@@ -71,5 +81,28 @@ public class MaintenanceMenu implements Menu {
             return;
         }
         System.out.println("Work order " + order.getOrderId() + " is now " + order.getStatus() + ".");
+    }
+
+    private void updateInspectionDetails() {
+        WorkOrder order = workOrderManager.findWorkOrder(prompt("Inspection Work Order ID"));
+        if (!(order instanceof Inspection) || !workOrderManager.getWorkOrdersAssignedTo(staff.getUserId()).contains(order)) {
+            System.out.println("That inspection order is not found or not assigned to you.");
+            return;
+        }
+        Inspection inspection = (Inspection) order;
+        
+        String notes = prompt("Inspector Notes");
+        if (!notes.isEmpty()) {
+            inspection.setInspectorNotes(notes);
+        }
+
+        String item = prompt("Checklist Item Name (or leave blank to skip)");
+        if (!item.isEmpty()) {
+            String passedStr = prompt("Did it pass? (true/false)");
+            boolean passed = Boolean.parseBoolean(passedStr);
+            inspection.addChecklistItem(item, passed);
+            System.out.println("Checklist item added.");
+        }
+        System.out.println("Inspection details updated successfully.");
     }
 }
