@@ -120,7 +120,7 @@ public class MainMenu implements Menu {
             AdminUser admin = (AdminUser) user;
             menu = new AdminMenu(scanner,
                     new PropertyAdminMenu(scanner, propertyManager, userManager),
-                    new StaffAccountMenu(scanner, registrationService),
+                    new UserManagementMenu(scanner, registrationService, userManager),
                     new ApplicationReviewMenu(scanner, applicationManager, approvalService, admin),
                     new WorkOrderAdminMenu(scanner, workOrderManager, userManager, admin),
                     reportService);
