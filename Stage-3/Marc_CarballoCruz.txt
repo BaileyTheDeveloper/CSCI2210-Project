@@ -1,0 +1,14 @@
+=====================================
+Author: Marc Carballo Cruz
+date 11/15/2026
+CSCI 2210 - Project Stage 3 - My Part
+=====================================
+1. Wrote the code for the following classes:
+  -Property
+  -Unit
+  -Application
+  -Lease
+  -PropertyManager
+  -ApplicationManager
+2. Wrote the user guide
+3. performed minor fixes in the program
