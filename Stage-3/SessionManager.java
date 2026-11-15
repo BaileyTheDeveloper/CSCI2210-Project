@@ -50,10 +50,6 @@ public class SessionManager {
 
     public boolean validateSession(String sessionId) {
         UserSession session = getSession(sessionId);
-        if (session == null || !session.isActive()) {
-            return false;
-        }
-        session.touch();
-        return true;
+        return session != null && session.isActive();
     }
 }
