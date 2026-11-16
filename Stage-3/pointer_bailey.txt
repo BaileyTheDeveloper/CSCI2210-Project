@@ -1,0 +1,23 @@
+Bailey Pointer
+CSCI2210 - Project Stage 3
+My contributions:
+
+1) Assigned classes to each member and created a plan including deadlines.
+2) Wrote the following classes as originally assigned:
+	a. User
+	b. Tenant
+	c. Owner
+	d. Applicant
+	e. AdminUser
+	f. MaintenanceStaff
+	g. UserManager
+	h. UserSession
+	i. SessionManager
+	j. LoginHandler
+	k. LogoutHandler
+3) Corrected issue when incorrect classes were created and original classes were deleted
+4) Created all menu classes.
+5) Handled all integration between classes written by the team to assure program ran smoothly.
+6) Met with professor to provide demo.
+7) Created readme.txt
+8) Delegated user guide and UML updates to the team.
